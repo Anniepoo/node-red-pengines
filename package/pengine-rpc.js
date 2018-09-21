@@ -1,31 +1,34 @@
 	module.exports = function(RED) {
 	    function PengineRPCNode(config) {
 	        RED.nodes.createNode(this,config);
+	        this.server = config.server;
+	        this.chunk = parseInt(config.chunk);
+	        this.sourceText = config.sourceText;
+	        this.template = config.template;
 	        var node = this;
 	        node.on('input', function(msg) {
-			var pengines = global.get('penginesModule');
-			var serverurl = context.get('server');
-			var chunk = int(context.get('chunk'));
-          var code = context.get('sourceText');
-          var template = context.get('template');
-			pengines({
-				server: serverurl,
-				chunk: chunk,
-				sourceText: code,
-				ask: msg.payload,
-				template: template
-				} )
-			    .on('success',function(result){
-					node.warn(result);
-					node.warn(result.data[0]);
-					for(var resultData in result.data) {
-					    node.send(result.data[resultData]);
-					}
-				    })
-			    .on('error', function(result){
-					 node.warn(result);
-					 node.error("pengine error ", msg);
-				 });
+					var pengines = this.context().global.get('penginesModule');
+
+					pengines({
+						server: node.server,
+						chunk: parseInt(node.chunk),
+						sourceText: node.sourceText,
+						ask: msg.payload,
+						template: node.template
+						} )
+					    .on('success',function(result){
+							for(var resultData in result.data) {
+								msg.payload = result.data[resultData];
+							   node.send(msg);
+							}
+							if(result.more) {
+							   this.next()
+							}
+						    })
+					    .on('error', function(result){
+							 node.warn(result);
+							 node.error("pengine error ", msg);
+						 });
 	        });
 	    }
 	    RED.nodes.registerType("pengine-rpc",PengineRPCNode);
