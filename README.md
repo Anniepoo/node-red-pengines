@@ -113,5 +113,13 @@ The commas mean 'and' in this context. You can use another predicate as well. Sa
 
 Notice, as an aside, that marketing is an atom. 
 
+## Contributors
+
+If you make a PR, please add your name and/or update contribs
+
+   * Anne Ogborn (Anniepoo on github) - original code
+   * brianx - much advice, alpha testing.
+ 
+
 
 
