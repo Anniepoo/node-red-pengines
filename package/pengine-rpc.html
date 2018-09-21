@@ -43,5 +43,30 @@
 </script>
 
 <script type="text/x-red" data-help-name="pengine-rpc">
-    <p>A node that makes queries to SWI-Prolog pengines</p>
+    <p>Makes queries to SWI-Prolog pengines.</p>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>msg <span class="property-type">object</span></dt>
+        <dd>A msg object. The payload is expected to be a string, the query to the pengine.</dd>
+    </dl>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>msg <span class="property-type">object</span></dt>
+        <dd>a msg whose payload is the retrieved data formatted as by the template.</dd>
+    </dl>
+    <h3>Details</h3>
+    <p><i><a href="swi-prolog.org" target="_blank">SWI-Prolog</a></i> supports 
+    <i><a href="http://www.swi-prolog.org/pldoc/man?section=pengine-overview" target="_blank">Pengines</a></i>, a system
+    for remotely making queries against a remote SWI-Prolog server.</p>
+    <p>This facility allows the user to execute arbitrary
+    Prolog code in a sandbox on the remote server. Often Pengines servers provide extra predicates that allow accessing
+    information on the remote server. So, rather than just sending REST queries, one can send an actual program for remote execution.</p>
+    <p>The node emits a message with each piece of data.</p>
+    <p>So, for example, sending the message <code>'member(X, [a,b,c])'</code> to a pengines server will cause it to respond with
+    <code>X=a</code>, <code>X=b</code>, <code>X=c</code>.</p>
+    <p>The format of the returned data depends on the <b>template</b> attribute. The variable names (identifiers <i>StartingWithUpperCase</i> are
+    variables in Prolog) in the template are replaced with the values of variables. 
+    So <code>X,Y</code> when X=3 and Y=4 emits the string <code>3,4</code>.</p>
+    <p>The pengines server will usually be on either <code>/</code> or <code>/pengines</code>. 
+    If you just need to compute in Prolog, feel free to use the default server</p>
 </script>
