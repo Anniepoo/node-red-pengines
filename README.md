@@ -21,7 +21,7 @@ You will need a working install of node-red, obviously.
 
 Install the node.js pengines client
 
-    cd ~/.node-red/
+    cd ~/.node-red/       (cd c:\Users\<userame>\.node-red\ on windows)
     npm install pengines
 
 Now you need to make the pengines module available to the pengines node. Edit ~/.node-red/settings.js
@@ -37,7 +37,18 @@ Find this section
 
 and add the line penginesModule:require('pengines')
 
-Now restart node-red and add the node-red pengines palette module from the UI:  _menu->manage palette_ search for pengines, and install.
+Now you need to install nod-red-pengines. The stuff to actually install is in the package
+directory inside the repo, so 
+
+     cd ~/.node-red/    (cd c:\Users\<userame>\.node-red\ on windows)
+	 npm install <package dir>
+	 
+For example, on my windows machine this is 
+	 C:\development\node-red-pengines\package
+on my Ubuntu it's 
+     ~/node-red-pengines/package
+
+Now restart node-red and the pengines node should be in the analysis section of the palette.
 
 
 ## Understanding node-red-pengines
@@ -59,6 +70,8 @@ Typically this would be http://mycompany.com/pengine.
 If you use localhost, you'll have issues because it will be promoted to https by node, and then not
 like the lack of cert or self signed cert. You can avoid this by using your external ip address,
 eg on my computer http://localhost:5000/pengine has this issue, but http://192.168.254.47/pengine works.
+
+This seems to work ok on Windows.
 
 ### Making a local pengines server
 
