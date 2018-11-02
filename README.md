@@ -19,37 +19,10 @@ You do need to know node-red, obviously.
 
 You will need a working install of node-red, obviously.
 
-Install the node.js pengines client
+Install the package:
 
     cd ~/.node-red/       (cd c:\Users\<userame>\.node-red\ on windows)
-    npm install pengines
-
-Now you need to make the pengines module available to the pengines node. Edit ~/.node-red/settings.js
-
-Find this section
-
-    functionGlobalContext: {
-        // os:require('os'),
-        // jfive:require("johnny-five"),
-        // j5board:require("johnny-five").Board({repl:false})
-        penginesModule:require('pengines')   // add this line
-    },
-
-and add the line penginesModule:require('pengines')
-
-Now you need to install nod-red-pengines. The stuff to actually install is in the package
-directory inside the repo, so 
-
-     cd ~/.node-red/    (cd c:\Users\<userame>\.node-red\ on windows)
-	 npm install <package dir>
-	 
-For example, on my windows machine this is 
-	 C:\development\node-red-pengines\package
-on my Ubuntu it's 
-     ~/node-red-pengines/package
-
-Now restart node-red and the pengines node should be in the analysis section of the palette.
-
+    npm install node-red-contrib-pengines
 
 ## Understanding node-red-pengines
 
@@ -190,8 +163,5 @@ If you make a PR, please update this section. Besides bragging rights, it's usef
 after.
 
    * Anne Ogborn (Anniepoo on github) - original code
-   * brianx - much advice, alpha testing.
- 
-
-
-
+   * brianx - much advice, alpha testing
+   * Raivo Laanemets - NPM package
