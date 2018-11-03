@@ -1,4 +1,4 @@
-# node-red-pengines
+# node-red-contrib-pengines
 
 This is a palette module for IBM's flow language node-red that allows querying a SWI-Prolog pengines server.
 
@@ -9,8 +9,7 @@ Quite often in the world of IoT, devices, and online connections that are common
 SWI-prolog has a facility, **pengines**, that allows one to submit a prolog query to a running instance of SWI-Prolog
 and obtain a sequence of answers.
 
-## What You need to know to use _node-red-pengines_ ?
-
+## What do you need to know to use _node-red-pengines_ ?d
 You do *not* need to be an expert in Prolog. The section below should teach you enough to make basic Pengines queries.
 
 You do need to know node-red, obviously.
@@ -26,8 +25,8 @@ Install the package:
 
 ## Understanding node-red-pengines
 
-node-red-penginges is a thin wrapper around [https://npm.runkit.com/pengines](the npm pengines package). 
-This in turn is a client for [http://pengines.swi-prolog.org/docs/index.html](Pengines), and so 
+node-red-penginges is a thin wrapper around (the npm pengines package)[https://npm.runkit.com/pengines]. 
+This in turn is a client for (Pengines)[http://pengines.swi-prolog.org/docs/index.html], and so 
 use requires knowledge of the Pengines system, although only minimal understanding of pengines 
 or of Prolog is sufficient to make basic queries.
 
