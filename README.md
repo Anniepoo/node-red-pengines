@@ -9,12 +9,16 @@ Quite often in the world of IoT, devices, and online connections that are common
 SWI-prolog has a facility, **pengines**, that allows one to submit a prolog query to a running instance of SWI-Prolog
 and obtain a sequence of answers.
 
-## What do you need to know to use _node-red-pengines_ ?d
-You do *not* need to be an expert in Prolog. The section below should teach you enough to make basic Pengines queries.
+## What do I need to know?
 
-You do need to know node-red, obviously.
+To use _node-red-pengines_ you do *not* need to be an expert in Prolog. 
 
-##Installation
+Most pengines calls are a single line of Prolog.
+The section below should teach you enough to make basic Pengines queries.
+
+You do need to know node-red.
+
+## Installation
 
 You will need a working install of node-red, obviously.
 
@@ -39,13 +43,39 @@ is a valid prolog query, and returns messages that are the answers to that query
 
 Typically this would be http://mycompany.com/pengine.
 
+The default will give you a standard pengines sandbox server. This will work fine for some purposes.
+
+See below to run your own local pengines server. You'd want to do this if, for example, you had some prolog code that accessed a local database.
+
 If you use localhost, you'll have issues because it will be promoted to https by node, and then not
 like the lack of cert or self signed cert. You can avoid this by using your external ip address,
 eg on my computer http://localhost:5000/pengine has this issue, but http://192.168.254.47/pengine works.
 
-This seems to work ok on Windows.
+The localhost problem seems to not occur on Windows.
 
-### Making a local pengines server
+### Chunk Size
+
+If you know you are going to get many solutions, you can turn the chunk size up and each pengine request will fetch
+that many results. On the other hand, if you are likely to only actually want the first one, you want the chunk
+size 1. Increasing chunk size commits to increased bandwidth and server load for the other solutions.
+
+### Extra Knowledge
+
+Additional Prolog code to be added to the knowledgebase. 
+
+### Template
+
+If your query is something like `foo(X, Y)` you're going to want X and Y.
+Template tells pengines how to assemble the bound variables into a string. So, if you make the
+template `X,"Y"`, and X is bound to 3, while Y is bound to `'Bob Smith'`, the message payload will
+be `3,"Bob Smith"`.
+
+## Making a local pengines server
+
+The default URL points to a publicly available pengines server that just serves
+a normal pengines sandbox.
+
+If you want, you can run your own server easily.
 
 You'll need a reasonably recent version of SWI-Prolog (7.4.0 or up should be fine.)
 
@@ -58,26 +88,9 @@ You'll need a reasonably recent version of SWI-Prolog (7.4.0 or up should be fin
 	?- use_module(library(pengines)).
 	true.
 
-You should now have a pengines server on port 5000. 
+You should now have a pengines server on port 5000.
 
-### Chunk Size
-
-If you know you are going to get many solutions you can turn the chunk size up and each pengine request will fetch
-that many results. On the other hand, if you are likely to only actually want the first one, you want the chunk
-size 1. Increasing chunk size commits to increased bandwidth and server load for the other solutions.
-
-### Extra Knowledge
-
-Additional Prolog code to be added to the knowledgebase. 
-
-### Template
-
-If your query is something like   `foo(X, Y)` you're going to want X and Y.
-Template tells pengines how to assemble the bound variables into a string. So, if you make the
-template `X,"Y"`, and X is bound to 3, while Y is bound to `'Bob Smith'`, the message payload will
-be `3,"Bob Smith"`.
-
-## Don't Know Prolog
+## I Don't Know Prolog
 
 If you don't know Prolog, you can do most basic queries with this introduction.
 
@@ -135,7 +148,7 @@ in zero, one, or many messages.
 
 One tricky bit about this.  Prolog returns all the ways it can 'prove' the employee 
 info is true. This sometimes means it will return multiple copies of a single 
-answer. If you need rows to be distinct, work with the Prolog programmer.
+answer. If you need rows to be distinct, work with the Prolog programmer. Usually public API's will have handled this.
 
 ### Limiting answers
 
