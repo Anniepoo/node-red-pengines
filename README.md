@@ -169,6 +169,17 @@ marketing, similar to an SQL join.
 
 Notice, as an aside, that marketing is an atom. 
 
+## Making a new version
+
+ * Increment the version in `package.json`
+ * Commit locally with a commit message that this is a release
+ * git tag -a "<version #>" -m "message saying whats updated"
+ * git push --tags origin master
+ * npm whoami
+ * if you are not swiprolog `sudo npm login` and provide the swiprolog credentials
+ * sudo npm publish
+ * announce the change on the node-red forums and slack
+
 ## Contributors
 
 If you make a PR, please update this section. Besides bragging rights, it's useful for maintainers who come
