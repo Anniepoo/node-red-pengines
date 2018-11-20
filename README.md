@@ -22,10 +22,17 @@ You do need to know node-red.
 
 You will need a working install of node-red, obviously.
 
-Install the package:
+You should be able to install from the node-red palette manager.
+
+To manually the package:
 
     cd ~/.node-red/       (cd c:\Users\<userame>\.node-red\ on windows)
     npm install node-red-contrib-pengines
+
+To install the package from a local git repo:
+
+    cd ~/.node-red/       (cd c:\Users\<userame>\.node-red\ on windows)
+    npm install ~/node-red-pengines (or wherever you have it cloned)
 
 ## Understanding node-red-pengines
 
@@ -43,7 +50,10 @@ is a valid prolog query, and returns messages that are the answers to that query
 
 Typically this would be http://mycompany.com/pengine.
 
-The default will give you a standard pengines sandbox server. This will work fine for some purposes.
+The default will give you a standard pengines sandbox server. This will work fine if you just want to run
+prolog code.
+
+For example, [https://apps.nms.kcl.ac.uk/reactome-pengine/](pengines server that serves the data from Reactome) serves an index of human biological pathways. 
 
 See below to run your own local pengines server. You'd want to do this if, for example, you had some prolog code that accessed a local database.
 
@@ -171,6 +181,10 @@ Notice, as an aside, that marketing is an atom.
 
 ## Making a new version
 
+ * Do your work on dev branch or a branch off of dev
+ * test by manually installing as above
+ * merge back to dev and test
+ * switch to master and merge back to master
  * Increment the version in `package.json`
  * Commit locally with a commit message that this is a release
  * git tag -a "<version #>" -m "message saying whats updated"
